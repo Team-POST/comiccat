@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('../layout/head.ejs') %>
   <title>Comic Cat</title>
 </head>
 <body>
@@ -13,8 +12,8 @@
   </section>
   <main>
     <h4>Find a Comic</h4>
-    <form action="/searches" method="post">
-      <input id=textBox type="text" name="search" placeholder="Enter a Title" value = "comic" required>
+    <form action="/results" method="post">
+      <input id="textBox" type="text" name="search" placeholder="Enter a Title" value = "comic" required>
       <fieldset>
       <button type="submit">Search the Marvel API</button>
     </form>
