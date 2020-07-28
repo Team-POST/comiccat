@@ -34,21 +34,27 @@ app.set('view engine', 'ejs');
 
 // ---------------------------------------ROUTES---------------------------------------------
 
-// / : Homepage (GET)
+
+app.get('/', renderHomePage);
 app.get('/searchresults', renderResultsPage);
 app.post('/results', collectResults); //searches : Search Results (POST)
+
 // /favorites : Saved Favorites (GET)
 // /edit/:id : Editable of Selected Comic (GET)
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 // /edit/:id : Make Changes to Selected Comic (PUT)
 // /delete/:id : Remove Selected Comic from Favorites (DELETE)
-// /aboutus : Details About the Team (GET)
-// /error : 404 Cat (GET)
-// * ERROR (GET)
+app.get('/about', renderAboutPage);
+app.get('/error', renderErrorPage);
+app.get('*', (request, response) => {
+  response.status(500).send('Paw-don us, something un-fur-tunate seems to have occured.')
+})
 
 // ---------------------------------------FUNCTIONS---------------------------------------------
 
-// / : Homepage (GET)
+function renderHomePage(request, response){
+  response.render('pages/index.ejs')
+}
 
 
 
@@ -118,12 +124,15 @@ function collectResults(request, response){
 
 
 
-// /aboutus : Details About the Team (GET)
+function renderAboutPage(request, response){
+  response.render('pages/about.ejs')
+}
 
 
 
-
-// /error : 404 Cat (GET)
+function renderErrorPage(request, response){
+  response.render('pages/error.ejs')
+}
 
 
 
