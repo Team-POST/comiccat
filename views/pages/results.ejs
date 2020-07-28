@@ -1,1 +1,31 @@
 <!-- /searches : Search Results (POST) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results Page</title>
+</head>
+<body>
+  <main>
+    <section class="results-page">
+      <% searchResults.forEach( comic => { %>
+        <div class="comic-container">
+          <img class="comic-image" src="<%= comic.comic_url %>"/>
+          <h2 class="comic-title"><%= comic.title %></h2>
+          <p><%= comic.description %></p>
+        </div>
+        
+        <form action="/add" method="POST">
+          <input type="hidden" name="title" value="<%= comic.title %>" />
+          <input type="hidden" name="description" value="<%= comic.description %>" />
+          <input type="hidden" name="image_url" value="<%= comic.comic_url %>" />
+
+          <button type="submit">Add to favorites</button>
+        </form>
+      <% }) %>
+    </section>
+  </main>
+  
+</body>
+</html>
