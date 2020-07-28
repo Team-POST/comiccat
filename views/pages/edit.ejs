@@ -1,1 +1,28 @@
-<!-- /edit/:id : Editable of Selected Comic (GET) -->
+<!-- /edit/:id : Editable of Selected Comic (GET) TODO: -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Your ComicCat</title>
+    <!-- <link href="styles/reset.css" rel="stylesheet" type="text/css"/> ? (applies to all links) does it need: styles/  -->
+    <!-- <link href="styles/base.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="styles/layout.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/modules.css" type="text/css"/> -->
+</head>
+<body>
+
+    <%- include('../layout/header.ejs') %>
+
+    <h1>HOWDY!</h1>
+    <form id="editbox" method="PUT" action="/edit/:<%= incomingComic.id %>">
+        <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>"><!-- Now the title *should be* the link to the Marvel.com page for the comic book/hero (if we reach that stretch goal). id="title" http://placekitten.com/g/200/300 TODO: change back comic_url end of night.-->
+        <fieldset>
+            <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="6" cols="30"><%= incomingComic.description %></textarea>
+            <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="5" cols="35" placeholder="Write your notes here"></textarea>
+            <!-- TODO: AND the notes -->
+        </fieldset>
+        <button>Update</button>
+    </form>
+</body>
+</html>
