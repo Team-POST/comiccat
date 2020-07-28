@@ -1,1 +1,29 @@
-<!-- /favorites : Saved Favorites (GET) -->
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../layout/header.ejs') %>
+<body>
+    <% allTheFavorites.forEach(fav => {  %>
+    <section class = "fav-page">
+        <div class="fav-main">
+            <div class="fav-image">
+                <img src="<%= fav.comic_url %>">
+            </div>
+            <div class="fav-text">
+                <p class="fav-title"><%= fav.title %></p>
+                <p class="fav-description"><%= fav.description %></p>
+                <p class="fav-notes"><%= fav.notes %></p>
+            </div>
+            <div class="fav-actions">
+                <form></form>
+                <form></form>
+            </div>
+
+        </div>
+        <div class="fav-cat">
+
+        </div>
+
+    </section>
+<% }) %>    
+</body>
+</html>
