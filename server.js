@@ -100,7 +100,15 @@ function collectResults(request, response){
 
 
 // /favorites : Saved Favorites (GET)
-
+app.get('/favorites', savedFavorites);
+function savedFavorites(request, response){
+  let sql = 'SELECT * FROM comics;';
+  client.query(sql)
+    .then(results => {
+      let comics = results.rows;
+      response.status(200).render('pages/favorites', {allTheFavorites : comics})
+    }).catch( error => console.log('air ROAR', error))
+}
 
 
 
