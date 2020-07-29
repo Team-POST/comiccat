@@ -6,8 +6,6 @@ const express = require('express');
 const app = express();
 const md5 = require('md5');
 console.log(md5(`${Date.now()}3a8da8275c6b32fab8d943182873cdd09a0e9fc843a8be537a93bcd1dc393a50768c3f41`));
-
-
 require('dotenv').config();
 const pg = require('pg');
 require('ejs');
@@ -45,10 +43,10 @@ app.put('/edit/:id', updateComic); // /edit/:id : Make Changes to Selected Comic
 app.delete('/delete/:id', deleteOneFavorite) 
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
+app.get('/table', showData);
 app.get('*', (request, response) => {
   response.status(500).send('Paw-don us, something un-fur-tunate seems to have occured.')
 })
-// app.get('/table', showData);
 // ---------------------------------------FUNCTIONS---------------------------------------------
 
 function renderHomePage(request, response){
@@ -173,8 +171,8 @@ function deleteOneFavorite(request, response){
   let id = request.params.id;
   let safeValues = [id];
   client.query(sql, safeValues)
-    .then(result => response.status(200).redirect('/favorites'))
-      .catch(error => console.log(error))
+    .then(() => response.status(200).redirect('/favorites'))
+    .catch(error => console.log(error))
 }
 
 
@@ -190,14 +188,14 @@ function renderErrorPage(request, response){
 }
 
 
-// function showData(request, response){
-//   let sql = 'SELECT * FROM comics;';
-//   client.query(sql)
-//     .then(resultsFromPostgres => {
-//       let comics = resultsFromPostgres.rows;
-//       response.send(comics);
-//     }).catch(err => console.log(err));
-// }
+function showData(request, response){
+  let sql = 'SELECT * FROM comics;';
+  client.query(sql)
+    .then(resultsFromPostgres => {
+      let comics = resultsFromPostgres.rows;
+      response.send(comics);
+    }).catch(err => console.log(err));
+}
 
 
 // ---------------------------------------CONSTRUCTOR FUNCTION---------------------------------------------

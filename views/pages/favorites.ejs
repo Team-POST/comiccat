@@ -18,7 +18,7 @@
             <p class="fav-notes"><%= fav.notes %></p>
         </div>
         <div class="fav-actions">
-            <form action="/edit/<%= fav.id %>?_method=PUT" method="post">
+            <form action="/edit/<%= fav.id %>" method="get">
                 <button type="submit">Edit</button>
             </form>
             <form action="/delete/<%=fav.id%>?_method=DELETE" method="post">
