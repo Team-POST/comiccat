@@ -13,6 +13,7 @@ const pg = require('pg');
 require('ejs');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
+// const { request, response } = require('express');
 
 // set up middleware
 
@@ -38,9 +39,9 @@ app.set('view engine', 'ejs');
 app.get('/', renderHomePage);
 app.post('/results', collectResults); //searches : Search Results (POST)
 app.get('/favorites', savedFavorites);
-// /edit/:id : Editable of Selected Comic (GET)
+app.get('/edit/:id', editComic); // /edit/:id : Editable of Selected Comic (GET)
 app.post('/addcomic', addComicToFavorites); // This is the Form with a surprise cat being added
-// /edit/:id : Make Changes to Selected Comic (PUT)
+app.put('/edit/:id', updateComic); // /edit/:id : Make Changes to Selected Comic (PUT)
 app.delete('/delete/:id', deleteOneFavorite) 
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
@@ -105,8 +106,22 @@ function savedFavorites(request, response){
 
 // /edit/:id : Editable of Selected Comic (GET)
 
+function editComic(request, response){
+  // response.send('howdy!')
+  let id = request.params.id;
+  let sql = 'SELECT * FROM comics WHERE id=$1;';
+  let safeValues = [id];
 
-
+  client.query(sql, safeValues)
+    .then(results => {
+      console.log(results.rows);
+      let bookToEdit = results.rows[0]; // as of 07-28 only one object within rows will be returned, hence is known w finality that the only response will be rows 0 of that array.
+      response.status(200).render('pages/edit.ejs', {incomingComic:bookToEdit});
+    }).catch((error) => {
+      console.log('ERROR', error);
+      response.status(500).send('MEOW!!! %*.*%');
+    })
+}
 
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 function addComicToFavorites(request, response){
@@ -132,7 +147,23 @@ function addComicToFavorites(request, response){
 
 // /edit/:id : Make Changes to Selected Comic (PUT)
 
+function updateComic(request, response) {
+  let id = request.params.id;
+  let {description, notes} = request.body;
+  let sql = 'UPDATE comics SET description=$1, notes=$2 WHERE id=$3;';
+  console.log(request.body);
 
+  let safeValues = [description, notes, id];
+
+  client.query(sql, safeValues)
+    .then(()=> {
+      console.log(sql);
+      response.status(200).redirect('/favorites') // TODO: where is this supposed to redirect to?
+    }).catch(error => {
+      console.log('ERROR', error);
+      response.status(500).send('ah, the FURor! no update yet.');
+    });
+}
 
 
 // /delete/:id : Remove Selected Comic from Favorites (DELETE)
