@@ -1,26 +1,25 @@
-<!-- /edit/:id : Editable of Selected Comic (GET) TODO: -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/modules.css">
     <title>Edit Your ComicCat</title>
-    <!-- <link href="styles/reset.css" rel="stylesheet" type="text/css"/> ? (applies to all links) does it need: styles/  -->
-    <!-- <link href="styles/base.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="styles/layout.css" type="text/css"/>
-    <link rel="stylesheet" href="styles/modules.css" type="text/css"/> -->
 </head>
 <body>
-
     <%- include('../layout/header.ejs') %>
-
-    <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>">
-    <form id="editbox" action="/edit/<%= incomingComic.id %>?_method=PUT" method="post"> // didn't need the colon after edit/ in action=.
-        <fieldset>
-            <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="6" cols="30"><%= incomingComic.description %></textarea>
-            <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="5" cols="35" placeholder="Write your notes here"></textarea>
-        </fieldset>
-        <button type="submit">Update</button>
-    </form>
+    <section>
+        <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>">
+        <form id="editbox" action="/edit/<%= incomingComic.id %>?_method=PUT" method="post"> 
+            <fieldset>
+                <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="6" cols="30"><%= incomingComic.description %></textarea>
+                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="5" cols="35" placeholder="Write your notes here"></textarea>
+            </fieldset>
+            <button type="submit">Update</button>
+        </form>
+    </section>
 </body>
 </html>
