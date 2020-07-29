@@ -144,7 +144,7 @@ function updateComic(request, response) {
   client.query(sql, safeValues)
     .then(()=> {
       console.log(sql);
-      response.status(200).redirect('/') // TODO: where is this supposed to redirect to?
+      response.status(200).redirect('/favorites') // TODO: where is this supposed to redirect to?
     }).catch(error => {
       console.log('ERROR', error);
       response.status(500).send('ah, the FURor! no update yet.');
