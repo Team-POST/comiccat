@@ -36,7 +36,6 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', renderHomePage);
-app.get('/searchresults', renderResultsPage);
 app.post('/results', collectResults); //searches : Search Results (POST)
 
 // /favorites : Saved Favorites (GET)
