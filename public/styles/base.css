@@ -1,13 +1,264 @@
 *{
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 body{
-  background-color: lightblue;
+  background-color: #03ade9;
   padding: 24px;
   /* width: 100%; */
   margin: auto 0;
 }
+
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* Nav Bar */
+
+nav{
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #eb1d28;
+  border-top: black solid 2em;
+  border-bottom: whitesmoke solid 1em;
+}
+nav ul li{
+  display: inline;
+  padding: 5px;
+  font-family: sans-serif;
+  border-radius: 15px;
+}
+
+nav ul li img{
+  display: inline;
+  margin-left: 0;
+  max-height: 25px;
+}
+
+nav ul li:hover{
+  background-color: rgb(235, 229, 215);
+}
+
+nav ul li:link{
+  color: whitesmoke;
+}
+
+nav ul li:visited{
+  color: #fce611;
+}
+
+/* Landing / Search Page */
+
+h1 {
+  font-size: 4em;
+  color: whitesmoke;
+  font-weight: bolder;
+  padding: .5em;
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  background-color: black;
+  border-radius: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+#titleBlock {
+  background-image: url(https://p2.piqsels.com/preview/690/220/870/marvel-comics-cartoon-entertainment.jpg);
+  padding: 2em;
+
+}
+
+#intro {
+  background-color: #fce611;
+  font-size: larger;
+  border-radius: 30%;
+  padding: 2em;
+  max-width: 60vw;
+  margin: 5vw 20vw;
+}
+
+#searchMain {
+  max-width: 25vw;
+  margin: 5vw 37.5vw;
+}
+
+#searchMain h4 {
+  text-align: center;
+  font-size: large;
+  padding: 1em 0;
+  background-color: whitesmoke;
+  border-radius: 30% 30% 0 0;
+}
+
+#searchMain form {
+  text-align: center;
+  font-size: large;
+  background-image: url(https://p2.piqsels.com/preview/690/220/870/marvel-comics-cartoon-entertainment.jpg);
+  background-position: center;
+}
+
+#textBox {
+  margin-top: 2em;
+  height: 4em;
+  width: 18vw;
+}
+
+#searchMain form button {
+  margin: 3em;
+  width: 15vw;
+}
+
+/* Favorites Page */
+
+.fav-page {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr;
+  /* outline: black solid 3px; */
+  max-width: 90vw;
+  max-height: 35vw;
+  margin: 1em 0 3em;
+  background-color: rgba(235, 29, 40, 0.9);
+  border-radius: 10%;
+}
+
+.fav-main {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr 2fr 1fr;
+  /* outline: yellow solid 3px; */
+  background-color: rgba(235, 29, 40, 0.9);
+  max-height: 25vw;
+}
+
+.fav-image img {
+  grid-row: 1 / span 3;
+  grid-column: 1;
+  max-height: 25vw;
+  max-width: 25vw;
+  border-radius: 10% 0 0 10%;
+}
+
+.fav-text {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 2fr;
+  /* outline: white dotted 3px; */
+  max-height: 24vw;
+  width: 50vw;
+  padding: 1em;
+  overflow: scroll;
+
+}
+
+.fav-title {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: rgba(252, 230, 17, 0.9);
+  font-style: italic;
+  font-weight: bold;
+  font-size: large;
+  padding: 1em 0 1em 1em;
+}
+
+.fav-description {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: rgba(3, 173, 233, 0.9);
+  padding: 1.5em;
+}
+
+.fav-notes {
+  grid-column: 1;
+  grid-row: 3;
+  background-color: white;
+  padding: 1.5em;
+}
+
+.fav-actions {
+  grid-column: 2 / span 1;
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  /* outline: white solid 3px; */
+  max-height: 7vw;
+  max-width: 100%;
+  border: 5vw;
+}
+
+.editButton {
+  grid-column: 1;
+}
+
+.deleteButton {
+  grid-column: 2;
+}
+
+.fav-cat {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.fav-cat img {
+  grid-column-start: 4;
+  max-height: 25vw;
+  max-width: 20vw;
+  border-radius: 0 10% 10% 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+/* Edit Page */
+
+#editSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+#editSection img {
+  max-width: 50vw;
+}
+
+
+#editbox {
+  background-color: yellow;
+  max-width: 50vw;
+  float: right;
+  margin-top: 2em;
+  margin-right: 1em;
+}
+
+#editbox textarea {
+  overflow: scroll;
+  width: 50vw;
+  margin-bottom: 1em;
+}
+
+#editbox label {
+  background-color: yellowgreen;
+  display: block;
+}
+
+#editbox button {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Search Results */
 
 .results-page {
   display: flex;
@@ -18,22 +269,6 @@ body{
   background-color: rgb(97, 97, 97);
   margin-top: 10px;
   /* justify-content: center; */
-}
-
-nav{
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-nav ul li{
-  display: inline;
-  padding: 5px;
-  font-family: sans-serif;
-  border-radius: 15px;
-}
-
-nav ul li:hover{
-  background-color: rgb(235, 229, 215);
 }
 
 .comic-container {
