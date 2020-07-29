@@ -41,7 +41,7 @@ app.post('/results', collectResults); //searches : Search Results (POST)
 
 app.get('/favorites', savedFavorites);
 // /edit/:id : Editable of Selected Comic (GET)
-// /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
+app.post('/addcomic', addComicToFavorites); // This is the Form with a surprise cat being added
 // /edit/:id : Make Changes to Selected Comic (PUT)
 app.delete('/delete/:id', deleteOneFavorite) 
 app.get('/about', renderAboutPage);
@@ -49,7 +49,7 @@ app.get('/error', renderErrorPage);
 app.get('*', (request, response) => {
   response.status(500).send('Paw-don us, something un-fur-tunate seems to have occured.')
 })
-
+// app.get('/table', showData);
 // ---------------------------------------FUNCTIONS---------------------------------------------
 
 function renderHomePage(request, response){
@@ -76,7 +76,7 @@ function collectResults(request, response){
     .query(comicParams)
     .then(results => {
       let comicArray = results.body.data.results;
-      console.log('the comic array', comicArray[0].thumbnail);
+      // console.log('the comic array', comicArray[0].thumbnail);
       let finalComicArray = comicArray.map(comic => {
         return new Comic(comic); //not sure about this, in book app its book.volumeInfo
       });
@@ -111,7 +111,24 @@ function savedFavorites(request, response){
 
 
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
+function addComicToFavorites(request, response){
+  let { title, description, image_url } = request.body;
 
+  let url = 'https://api.thecatapi.com/v1/images/search';
+
+  superagent.get(url)
+    .then(results => {
+
+      let randomCat = results.body[0].url;
+
+      let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
+      let safeValues = [title, image_url, description, randomCat];
+
+      client.query(sql, safeValues)
+    })
+
+
+}
 
 
 
@@ -144,7 +161,14 @@ function renderErrorPage(request, response){
 }
 
 
-
+// function showData(request, response){
+//   let sql = 'SELECT * FROM comics;';
+//   client.query(sql)
+//     .then(resultsFromPostgres => {
+//       let comics = resultsFromPostgres.rows;
+//       response.send(comics);
+//     }).catch(err => console.log(err));
+// }
 
 
 // ---------------------------------------CONSTRUCTOR FUNCTION---------------------------------------------
