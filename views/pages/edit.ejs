@@ -14,15 +14,13 @@
 
     <%- include('../layout/header.ejs') %>
 
-    <h1>HOWDY!</h1>
-    <form id="editbox" method="PUT" action="/edit/:<%= incomingComic.id %>">
-        <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>"><!-- Now the title *should be* the link to the Marvel.com page for the comic book/hero (if we reach that stretch goal). id="title" http://placekitten.com/g/200/300 TODO: change back comic_url end of night.-->
+    <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>">
+    <form id="editbox" action="/edit/<%= incomingComic.id %>?_method=PUT" method="post"> // didn't need the colon after edit/ in action=.
         <fieldset>
             <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="6" cols="30"><%= incomingComic.description %></textarea>
             <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="5" cols="35" placeholder="Write your notes here"></textarea>
-            <!-- TODO: AND the notes -->
         </fieldset>
-        <button>Update</button>
+        <button type="submit">Update</button>
     </form>
 </body>
 </html>
