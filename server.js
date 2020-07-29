@@ -124,6 +124,12 @@ function editComic(request, response){
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 function addComicToFavorites(request, response){
   let { title, description, image_url } = request.body;
+  let shafeValues=[title];
+  let checkDatabaseSql= 'SELECT * FROM comics WHERE title =$1;';
+  client.query(checkDatabaseSql, shafeValues)
+  .then(results =>{
+    //if statement stuff
+  })
 
   let url = 'https://api.thecatapi.com/v1/images/search';
 
