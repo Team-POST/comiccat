@@ -14,16 +14,17 @@
         <div class="comic-container">
           <img class="comic-image" src="<%= comic.comic_url %>"/>
           <h2 class="comic-title"><%= comic.title %></h2>
-          <p><%= comic.description %></p>
-        </div>
+          <p class="comic-description"><%= comic.description %></p>
         
-        <form action="/addcomic" method="POST">
-          <input type="hidden" name="title" value="<%= comic.title %>" />
-          <input type="hidden" name="description" value="<%= comic.description %>" />
-          <input type="hidden" name="image_url" value="<%= comic.comic_url %>" />
+        
+          <form action="/addcomic" method="POST">
+            <input type="hidden" name="title" value="<%= comic.title %>" />
+            <input type="hidden" name="description" value="<%= comic.description %>" />
+            <input type="hidden" name="image_url" value="<%= comic.comic_url %>" />
 
-          <button type="submit">Add to favorites</button>
-        </form>
+          <button class="favorites-button"type="submit">Add to favorites</button>
+          </form>
+      </div>
       <% }) %>
     </section>
   </main>

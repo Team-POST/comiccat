@@ -1,3 +1,100 @@
+*{
+  font-family: sans-serif;
+}
+
 body{
-  background-color: red;
+  background-color: lightblue;
+  padding: 24px;
+  /* width: 100%; */
+  margin: auto 0;
+}
+
+.results-page {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* border: 4px solid black; */
+  background-color: rgb(97, 97, 97);
+  margin-top: 10px;
+  /* justify-content: center; */
+}
+
+nav{
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+nav ul li{
+  display: inline;
+  padding: 5px;
+  font-family: sans-serif;
+  border-radius: 15px;
+}
+
+nav ul li:hover{
+  background-color: rgb(235, 229, 215);
+}
+
+.comic-container {
+  box-sizing: border-box;
+  background-color: rgb(195, 207, 220);
+  border-radius: 15px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  margin: 12px;
+  padding: 12px;
+  width: 100%;
+  transition: all 0.5s;
+  /* flex: 0 1 480px */
+}
+
+.comic-image {
+  display: block;
+  height: auto;
+  width: 200px;
+  margin-top: 20px;
+  border: 4px solid white;
+}
+
+.comic-title {
+  font-size: 30px;
+  font-family: 'Righteous', cursive;;
+  text-align: right;
+  margin-bottom: 14px;
+  display: block;
+  position: relative;
+  bottom: 200px;  
+}
+
+.comic-description {
+  margin-bottom: 12px;
+  font-family: sans-serif;
+  width: 200x;
+  font-size: 18px;
+  text-align: right;
+  position: relative;
+  bottom: 200px; 
+}
+
+.favorites-button {
+  padding: 12px;
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+
+}
+
+.favorites-button:hover{
+  background-color: lightblue;
+}
+
+button {
+  padding: 12px;
+  width: 200px;
+  display: block;
+  border-radius: 15px;
+}
+
+button:hover{
+  background-color: lightblue;
 }
