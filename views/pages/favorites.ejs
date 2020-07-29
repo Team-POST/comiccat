@@ -18,15 +18,13 @@
             <p class="fav-notes"><%= fav.notes %></p>
         </div>
         <div class="fav-actions">
-            <form action="/edit/:<%= fav.id %>">
+            <form action="/edit/<%= fav.id %>?_method=PUT" method="post">
                 <button type="submit">Edit</button>
             </form>
-            <form action="/delete/:<%=fav.id%>">
+            <form action="/delete/<%=fav.id%>?_method=DELETE" method="post">
                 <button type="submit">Delete</button>
             </form>
         </div>
-        <!-- // /edit/:id : Make Changes to Selected Comic (PUT)
-        // /delete/:id : Remove Selected Comic from Favorites  -->
     </div>
     <div class="fav-cat">
         <img src="<%= fav.cat_url %>">
