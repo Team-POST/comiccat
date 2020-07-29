@@ -36,14 +36,14 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', renderHomePage);
-app.get('/searchresults', renderResultsPage);
+// app.get('/searchresults', renderResultsPage);
 app.post('/results', collectResults); //searches : Search Results (POST)
 
-// /favorites : Saved Favorites (GET)
+app.get('/favorites', savedFavorites);
 // /edit/:id : Editable of Selected Comic (GET)
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 // /edit/:id : Make Changes to Selected Comic (PUT)
-// /delete/:id : Remove Selected Comic from Favorites (DELETE)
+app.delete('/delete/:id', deleteOneFavorite) 
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
 app.get('*', (request, response) => {
@@ -93,7 +93,7 @@ function collectResults(request, response){
 
 
 // /favorites : Saved Favorites (GET)
-app.get('/favorites', savedFavorites);
+
 function savedFavorites(request, response){
   let sql = 'SELECT * FROM comics;';
   client.query(sql)
@@ -121,7 +121,15 @@ function savedFavorites(request, response){
 
 
 // /delete/:id : Remove Selected Comic from Favorites (DELETE)
-
+function deleteOneFavorite(request, response){
+  console.log(request.params.id, "hahahahahahahah");
+  let sql = 'DELETE FROM comics WHERE ID=$1;';
+  let id = request.params.id;
+  let safeValues = [id];
+  client.query(sql, safeValues)
+    .then(result => response.status(200).redirect('/favorites'))
+      .catch(error => console.log(error))
+}
 
 
 
