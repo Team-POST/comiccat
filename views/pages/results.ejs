@@ -21,12 +21,14 @@
             <input type="hidden" name="description" value="<%= comic.description %>" />
             <input type="hidden" name="image_url" value="<%= comic.comic_url %>" />
 
-          <button class="favorites-button"type="submit">Add to favorites</button>
+          <button
+          id="<%=comic.title%>"
+          class="favorites-button"type="submit">Add to favorites</button>
           </form>
       </div>
       <% }) %>
     </section>
   </main>
-  
+  <script src="/app.js"></script>
 </body>
 </html>
