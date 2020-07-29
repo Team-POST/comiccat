@@ -36,9 +36,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', renderHomePage);
-// app.get('/searchresults', renderResultsPage);
 app.post('/results', collectResults); //searches : Search Results (POST)
-
 app.get('/favorites', savedFavorites);
 // /edit/:id : Editable of Selected Comic (GET)
 app.post('/addcomic', addComicToFavorites); // This is the Form with a surprise cat being added
