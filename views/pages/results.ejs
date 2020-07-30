@@ -15,7 +15,6 @@
           <h2 class="comic-title"><%= comic.title %></h2>
           <p class="comic-description"><%= comic.description %></p>
         
-        
           <form action="/addcomic" method="POST">
             <input type="hidden" name="title" value="<%= comic.title %>" />
             <input type="hidden" name="description" value="<%= comic.description %>" />
