@@ -16,7 +16,16 @@
 
                 <label for="notes">Notes</label>
 
-                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="20" cols="35" placeholder="Write your notes here"></textarea>
+                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="20" cols="35" placeholder="Write your notes here"><%= incomingComic.notes %></textarea>
+                <p>
+                    <label>Read Status</label>
+                    <select id="progress" name="progress" value="<%= incomingComic.progress%> ">
+                        <option hidden disabled selected value>Select an Option</option> <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank to know this  -->
+                        <option>Want to Read</option>
+                        <option>Am Reading</option>
+                        <option>Have Read</option>
+                    </select>
+                </p>
             </fieldset>
             <button type="submit">Update</button>
         </form>

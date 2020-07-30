@@ -142,7 +142,7 @@ function addComicToFavorites(request, response){
         let safeIllUse = [idForCount, newCount];
         let seaQuill = 'UPDATE comics SET favorite_count=$2 WHERE id=$1;';
         client.query(seaQuill, safeIllUse)
-      } else {
+      } else { // Beasley is working here on til 158. TODO:
         let url = 'https://api.thecatapi.com/v1/images/search';
 
         superagent.get(url)
@@ -163,16 +163,16 @@ function addComicToFavorites(request, response){
 
 function updateComic(request, response) {
   let id = request.params.id;
-  let {description, notes} = request.body;
-  let sql = 'UPDATE comics SET description=$1, notes=$2 WHERE id=$3;';
+  let {description, notes, progress} = request.body;
+  let sql = 'UPDATE comics SET description=$1, notes=$2, progress=$3 WHERE id=$4;';
   console.log(request.body);
 
-  let safeValues = [description, notes, id];
+  let safeValues = [description, notes, progress, id];
 
   client.query(sql, safeValues)
     .then(()=> {
-      console.log(sql);
-      response.status(200).redirect('/favorites') // TODO: where is this supposed to redirect to?
+      response.status(200).redirect('/favorites')
+      // console.log(sql);
     }).catch(error => {
       console.log('ERROR', error);
       response.status(500).send('ah, the FURor! no update yet.');
