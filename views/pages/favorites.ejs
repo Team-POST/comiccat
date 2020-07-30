@@ -6,6 +6,7 @@
 </head>
 <body>
 <%- include('../layout/header.ejs') %>
+<main>
 <% allTheFavorites.forEach(fav => {  %>
 <section class = "fav-page">
     <div class="fav-main">
@@ -19,18 +20,23 @@
         </div>
         <div class="fav-actions">
             <form action="/edit/<%= fav.id %>" method="get">
-                <button type="submit">Edit</button>
+                <button class="editButton" type="submit">Edit</button>
             </form>
             <form action="/delete/<%=fav.id%>?_method=DELETE" method="post">
-                <button type="submit">Delete</button>
+                <button class="deleteButton" type="submit">Delete</button>
             </form>
         </div>
     </div>
     <div class="fav-cat">
         <img src="<%= fav.cat_url %>">
+        <form action="/rollcat/" method="POST">
+            <input type="hidden" name="id" value="<%=fav.id%>">
+            <button type="submit">Roll for Cat!</button>
+        </form>
     </div>
 
 </section>
-<% }) %>    
+<% }) %>   
+</main> 
 </body>
 </html>

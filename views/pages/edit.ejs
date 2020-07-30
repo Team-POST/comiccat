@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/modules.css">
+    <%- include('../layout/head.ejs') %>
     <title>Edit Your ComicCat</title>
 </head>
 <body>
     <%- include('../layout/header.ejs') %>
-    <section>
+    <section id="editSection">
         <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>">
         <form id="editbox" action="/edit/<%= incomingComic.id %>?_method=PUT" method="post"> 
             <fieldset>
-                <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="6" cols="30"><%= incomingComic.description %></textarea>
-                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="5" cols="35" placeholder="Write your notes here"></textarea>
+                <label for="description">Description</label>
+
+                <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="20" cols="30"><%= incomingComic.description %></textarea>
+
+                <label for="notes">Notes</label>
+
+                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="20" cols="35" placeholder="Write your notes here"></textarea>
             </fieldset>
             <button type="submit">Update</button>
         </form>
