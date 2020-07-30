@@ -166,7 +166,7 @@ function updateComic(request, response) {
   let id = request.params.id;
   let {description, notes, progress} = request.body;
   let sql = 'UPDATE comics SET description=$1, notes=$2, progress=$3 WHERE id=$4;';
-  console.log(request.body);
+  // console.log(request.body);
 
   let safeValues = [description, notes, progress, id];
 
