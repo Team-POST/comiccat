@@ -2,7 +2,6 @@
 
 $('.favorites-button').on("click", function(){
   // event.preventDefault(); // Why does this need to be turned off, for the route to work (because it doesn't save the comic book), but the rest of the function does?
-  console.log('this is this thing this way', this);
   $(this).text('This title is in favorites');
   // location.href = '/addComic'; // this does work for routes as well as other "usual" urls.
 });

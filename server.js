@@ -5,7 +5,6 @@
 const express = require('express');
 const app = express();
 const md5 = require('md5');
-console.log(md5(`${Date.now()}3a8da8275c6b32fab8d943182873cdd09a0e9fc843a8be537a93bcd1dc393a50768c3f41`));
 require('dotenv').config();
 const pg = require('pg');
 require('ejs');
@@ -56,7 +55,6 @@ function renderHomePage(request, response){
 
 
 function collectResults(request, response){
-  console.log('I am the request.query', request.body);
   let url = 'https://gateway.marvel.com/v1/public/comics';
 
   let hashValue = md5(`${Date.now()}${process.env.MARVEL_API}${process.env.MARVEL_PUBLIC_API}`);
@@ -79,7 +77,6 @@ function collectResults(request, response){
         let finalComicArray = comicArray.map(comic => {
           return new Comic(comic);
         })
-        // console.log('this is the final comic array:', finalComicArray);
         response.render('pages/results.ejs', {searchResults: finalComicArray})
       } else {
         //if empty
@@ -118,7 +115,6 @@ function editComic(request, response){
 
   client.query(sql, safeValues)
     .then(results => {
-      console.log(results.rows);
       let bookToEdit = results.rows[0]; // as of 07-28 only one object within rows will be returned, hence is known w finality that the only response will be rows 0 of that array.
       response.status(200).render('pages/edit.ejs', {incomingComic:bookToEdit});
     }).catch((error) => {
@@ -129,7 +125,6 @@ function editComic(request, response){
 
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 function addComicToFavorites(request, response){
-  // console.log(request.body);
   let { title, description, image_url } = request.body;
 
   let shafeValues=[title];
@@ -148,8 +143,9 @@ function addComicToFavorites(request, response){
         superagent.get(url)
           .then(results => {
             let randomCat = results.body[0].url;
-            let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
-            let safeValues = [title, image_url, description, randomCat];
+            let initialCount = 1;
+            let sql = 'INSERT INTO comics (title, comic_url, description, cat_url, favorite_count) VALUES ($1, $2, $3, $4, $5);';
+            let safeValues = [title, image_url, description, randomCat, initialCount];
 
             client.query(sql, safeValues)
           })
@@ -165,14 +161,12 @@ function updateComic(request, response) {
   let id = request.params.id;
   let {description, notes, progress} = request.body;
   let sql = 'UPDATE comics SET description=$1, notes=$2, progress=$3 WHERE id=$4;';
-  console.log(request.body);
 
   let safeValues = [description, notes, progress, id];
 
   client.query(sql, safeValues)
     .then(()=> {
       response.status(200).redirect('/favorites')
-      // console.log(sql);
     }).catch(error => {
       console.log('ERROR', error);
       response.status(500).send('ah, the FURor! no update yet.');
@@ -182,7 +176,6 @@ function updateComic(request, response) {
 
 // /delete/:id : Remove Selected Comic from Favorites (DELETE)
 function deleteOneFavorite(request, response){
-  console.log(request.params.id, "hahahahahahahah");
   let sql = 'DELETE FROM comics WHERE ID=$1;';
   let id = request.params.id;
   let safeValues = [id];
@@ -241,7 +234,7 @@ function Comic(obj){
 }
 
 
-// console.log('the comic array', comicArray[0].thumbnail);
+
 
 // Connect to Postgres and turn on the PORT
 
