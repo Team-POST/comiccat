@@ -40,7 +40,7 @@ app.get('/favorites', savedFavorites);
 app.get('/edit/:id', editComic); // /edit/:id : Editable of Selected Comic (GET)
 app.post('/addcomic', addComicToFavorites); // This is the Form with a surprise cat being added
 app.put('/edit/:id', updateComic); // /edit/:id : Make Changes to Selected Comic (PUT)
-app.delete('/delete/:id', deleteOneFavorite)
+app.delete('/delete/:id', deleteOneFavorite);
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
 app.get('/table', showData);
@@ -129,20 +129,29 @@ function editComic(request, response){
 
 // /addcomic : Add a new favorite comic (POST) // This is the Form with a surprise cat being added
 function addComicToFavorites(request, response){
+  // console.log(request.body);
   let { title, description, image_url } = request.body;
 
-  let url = 'https://api.thecatapi.com/v1/images/search';
+  let shafeValues=[title];
+  let checkDatabaseSql= 'SELECT * FROM comics WHERE title =$1;';
+  client.query(checkDatabaseSql, shafeValues)
+    .then(results =>{
+      if(results.rowCount){
+        console.log('yes, the comic is in the table already.');
+        // response.status(200).send('This comic is already in favorites.');
+      } else {
+        let url = 'https://api.thecatapi.com/v1/images/search';
 
-  superagent.get(url)
-    .then(results => {
-      console.log(results.body);
-      let randomCat = results.body[0].url;
-  
-      let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
-      let safeValues = [title, image_url, description, randomCat];
+        superagent.get(url)
+          .then(results => {
+            let randomCat = results.body[0].url;
+            let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
+            let safeValues = [title, image_url, description, randomCat];
 
-      client.query(sql, safeValues)
-    })
+            client.query(sql, safeValues)
+          })
+      }
+    });
 }
 
 
