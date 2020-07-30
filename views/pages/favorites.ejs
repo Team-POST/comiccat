@@ -28,6 +28,10 @@
     </div>
     <div class="fav-cat">
         <img src="<%= fav.cat_url %>">
+        <form action="/rollcat/" method="POST">
+            <input type="hidden" name="id" value="<%=fav.id%>">
+            <button type="submit">Roll for Cat!</button>
+        </form>
     </div>
 
 </section>
