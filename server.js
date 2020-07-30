@@ -137,8 +137,11 @@ function addComicToFavorites(request, response){
   client.query(checkDatabaseSql, shafeValues)
     .then(results =>{
       if(results.rowCount){
-        console.log('yes, the comic is in the table already.');
-        // response.status(200).send('This comic is already in favorites.');
+        let idForCount= results.rows[0].id;
+        let newCount= 1 + results.rows[0].favorite_count;
+        let safeIllUse = [idForCount, newCount];
+        let seaQuill = 'UPDATE comics SET favorite_count=$2 WHERE id=$1;';
+        client.query(seaQuill, safeIllUse)
       } else {
         let url = 'https://api.thecatapi.com/v1/images/search';
 
