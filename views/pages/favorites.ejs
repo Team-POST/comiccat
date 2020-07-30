@@ -17,6 +17,7 @@
             <p class="fav-title"><%= fav.title %></p>
             <p class="fav-description"><%= fav.description %></p>
             <p class="fav-notes"><%= fav.notes %></p>
+            <p><%= fav.favorite_count %></p>
         </div>
         <div class="fav-actions">
             <form action="/edit/<%= fav.id %>" method="get">
