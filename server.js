@@ -148,8 +148,9 @@ function addComicToFavorites(request, response){
         superagent.get(url)
           .then(results => {
             let randomCat = results.body[0].url;
-            let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
-            let safeValues = [title, image_url, description, randomCat];
+            let initialCount = 1;
+            let sql = 'INSERT INTO comics (title, comic_url, description, cat_url, favorite_count) VALUES ($1, $2, $3, $4, $5);';
+            let safeValues = [title, image_url, description, randomCat, initialCount];
 
             client.query(sql, safeValues)
           })
