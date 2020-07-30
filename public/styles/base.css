@@ -26,12 +26,15 @@ nav{
   background-color: #eb1d28;
   border-top: black solid 2em;
   border-bottom: whitesmoke solid 1em;
+  color: rgba(3, 173, 233, 0.9);
 }
 nav ul li{
   display: inline;
   padding: 5px;
   font-family: sans-serif;
   border-radius: 15px;
+  font-size: 1.5em;
+  color: rgba(3, 173, 233, 0.9);
 }
 
 nav ul li img{
@@ -41,7 +44,7 @@ nav ul li img{
 }
 
 nav ul li:hover{
-  background-color: rgb(235, 229, 215);
+  background-color: rgb(118, 209, 230);
 }
 
 nav ul li:link{
@@ -77,42 +80,58 @@ h1 {
 
 #intro {
   background-color: #fce611;
-  font-size: larger;
-  border-radius: 30%;
+  font-size: 2em;
+  border-radius: 30px;
   padding: 2em;
-  max-width: 60vw;
-  margin: 5vw 20vw;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  max-width: 960px;
 }
 
 #searchMain {
-  max-width: 25vw;
-  margin: 5vw 37.5vw;
+  /* max-width: 25vw; */
+  /* margin: 5vw 37.5vw; */
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 #searchMain h4 {
   text-align: center;
-  font-size: large;
+  font-size: 3em;
   padding: 1em 0;
+  font-family: sans-serif;
   background-color: whitesmoke;
-  border-radius: 30% 30% 0 0;
+  border-radius: 30px 30px 0 0;
 }
 
 #searchMain form {
   text-align: center;
-  font-size: large;
+  font-size: 3em;
   background-image: url(https://p2.piqsels.com/preview/690/220/870/marvel-comics-cartoon-entertainment.jpg);
   background-position: center;
+  width: 100%;
 }
 
 #textBox {
-  margin-top: 2em;
   height: 4em;
-  width: 18vw;
+  font-size: .5em;
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2em;
 }
 
 #searchMain form button {
-  margin: 3em;
-  width: 15vw;
+  /* margin: 3em; */
+  /*width: 15vw; */
+  width: 100%;
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 1em;
 }
 
 /* Favorites Page */
@@ -122,22 +141,28 @@ h1 {
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr;
   /* outline: black solid 3px; */
-  max-width: 90vw;
-  max-height: 35vw;
-  margin: 1em 0 3em;
+  /* max-width: 90vw; */
+  /* max-height: 35vw; */
+  /* margin: 1em 0 3em; */
+  margin: 0 auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
   background-color: rgba(235, 29, 40, 0.9);
-  border-radius: 10%;
+  border-radius: 20px;
+  width: 100%;
+  height: 350px;
+  /* max-width: 960px; */
 }
 
 .fav-main {
+  display: grid;
   grid-row: 1;
   grid-column: 1;
-  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 2fr 2fr 1fr;
-  /* outline: yellow solid 3px; */
-  background-color: rgba(235, 29, 40, 0.9);
+  grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
+  /* background-color: rgba(235, 29, 40, 0.9); */
   max-height: 25vw;
+  margin: 0 auto;
 }
 
 .fav-image img {
@@ -145,7 +170,10 @@ h1 {
   grid-column: 1;
   max-height: 25vw;
   max-width: 25vw;
-  border-radius: 10% 0 0 10%;
+  border-radius: 10px 0 0 10px;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-right: 15px;
 }
 
 .fav-text {
@@ -155,10 +183,13 @@ h1 {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 2fr 2fr;
   /* outline: white dotted 3px; */
-  max-height: 24vw;
+  /* max-height: 24vw; */
   width: 50vw;
-  padding: 1em;
+  /* padding: 1em; */
   overflow: scroll;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-right: 15px;
 
 }
 
@@ -168,7 +199,7 @@ h1 {
   background-color: rgba(252, 230, 17, 0.9);
   font-style: italic;
   font-weight: bold;
-  font-size: large;
+  font-size: 2em;
   padding: 1em 0 1em 1em;
 }
 
@@ -187,13 +218,14 @@ h1 {
 }
 
 .fav-actions {
-  grid-column: 2 / span 1;
-  grid-row: 4;
   display: grid;
+  grid-column: 2 / span 1;
+  grid-row-start: 3;
+  grid-row-end: 4;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   /* outline: white solid 3px; */
-  max-height: 7vw;
+  /* max-height: 7vw; */
   max-width: 100%;
   border: 5vw;
 }
@@ -277,40 +309,33 @@ h1 {
   padding: 12px;
   width: 100%;
   transition: all 0.5s;
-  /* flex: 0 1 480px */
   grid-row: 1;
   grid-column: 1;
   display: grid;
   grid-template-columns: 1fr 3fr;
-  /* grid-template-rows: 1fr 2fr 2fr; */
   background-color: rgba(235, 29, 40, 0.9);
   border-radius: 15px;
+  max-width: 960px;
 }
 
 .comic-image {
+  grid-column-start: 1;
+  grid-column-end: 2;
   grid-row: 1 / span 3;
-  grid-column: 1;
   width: 300px;
   border: 5px solid white;
 }
 
 .comic-title {
-  /* font-size: 30px;
-  font-family: 'Righteous', cursive;;
-  text-align: right;
-  margin-bottom: 14px;
-  display: block;
-  position: relative;
-  bottom: 200px;   */
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row: 1;
   background-color: rgba(252, 230, 17, 0.9);
-  font-style: italic;
-  font-weight: bold;
-  font-size: large;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  font-size: 2em;
   text-align: center;
-  padding: 1em 0 1em 1em;
+  padding: 15px;
   border-radius: 15px;
 }
 
@@ -321,22 +346,16 @@ h1 {
   grid-column-end: 3;
   grid-row: 2 / span 1;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr;
-  /* max-height: 24vw; */
+  max-height: 24vw;
   border-radius: 15px;
-  /* width: 50vw; */
   background-color: rgba(3, 173, 233, 0.9);
   padding: 15px;
   overflow: scroll;
-  font-size: 20px;
+  font-size: 1.5em;
   font-family: sans-serif;
 }
 
 .favorites-button {
-  padding: 12px;
-  width: 100%;
-  display: block;
   border-radius: 15px;
   display: grid;
   grid-column-start: 1;
@@ -344,6 +363,13 @@ h1 {
   grid-row-start: 2;
   grid-row-end: end;
   background-color: rgba(252, 230, 17, 0.9);
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 12px;
+  width: 100%;
+  /* height: 40px; */
+  display: block;
+  margin: 0 auto;
 }
 
 .favorites-button:hover{
