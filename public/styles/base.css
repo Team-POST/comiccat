@@ -261,19 +261,16 @@ h1 {
 /* Search Results */
 
 .results-page {
+  margin: 0 auto;
   display: flex;
   box-sizing: border-box;
   flex-wrap: wrap;
   flex-direction: row;
-  /* border: 4px solid black; */
-  background-color: rgb(97, 97, 97);
-  margin-top: 10px;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .comic-container {
   box-sizing: border-box;
-  background-color: rgb(195, 207, 220);
   border-radius: 15px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   margin: 12px;
@@ -281,34 +278,59 @@ h1 {
   width: 100%;
   transition: all 0.5s;
   /* flex: 0 1 480px */
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  /* grid-template-rows: 1fr 2fr 2fr; */
+  background-color: rgba(235, 29, 40, 0.9);
+  border-radius: 15px;
 }
 
 .comic-image {
-  display: block;
-  height: auto;
-  width: 200px;
-  margin-top: 20px;
-  border: 4px solid white;
+  grid-row: 1 / span 3;
+  grid-column: 1;
+  width: 300px;
+  border: 5px solid white;
 }
 
 .comic-title {
-  font-size: 30px;
+  /* font-size: 30px;
   font-family: 'Righteous', cursive;;
   text-align: right;
   margin-bottom: 14px;
   display: block;
   position: relative;
-  bottom: 200px;  
+  bottom: 200px;   */
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row: 1;
+  background-color: rgba(252, 230, 17, 0.9);
+  font-style: italic;
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  padding: 1em 0 1em 1em;
+  border-radius: 15px;
 }
 
 .comic-description {
+  margin-top: 12px;
   margin-bottom: 12px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row: 2 / span 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  /* max-height: 24vw; */
+  border-radius: 15px;
+  /* width: 50vw; */
+  background-color: rgba(3, 173, 233, 0.9);
+  padding: 15px;
+  overflow: scroll;
+  font-size: 20px;
   font-family: sans-serif;
-  width: 200x;
-  font-size: 18px;
-  text-align: right;
-  position: relative;
-  bottom: 200px; 
 }
 
 .favorites-button {
@@ -316,7 +338,12 @@ h1 {
   width: 100%;
   display: block;
   border-radius: 15px;
-
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: end;
+  grid-row-start: 2;
+  grid-row-end: end;
+  background-color: rgba(252, 230, 17, 0.9);
 }
 
 .favorites-button:hover{
@@ -328,6 +355,7 @@ button {
   width: 200px;
   display: block;
   border-radius: 15px;
+  background-color: rgba(252, 230, 17, 0.9);
 }
 
 button:hover{
