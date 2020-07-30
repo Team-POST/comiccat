@@ -40,13 +40,14 @@ app.get('/favorites', savedFavorites);
 app.get('/edit/:id', editComic); // /edit/:id : Editable of Selected Comic (GET)
 app.post('/addcomic', addComicToFavorites); // This is the Form with a surprise cat being added
 app.put('/edit/:id', updateComic); // /edit/:id : Make Changes to Selected Comic (PUT)
-app.delete('/delete/:id', deleteOneFavorite) 
+app.delete('/delete/:id', deleteOneFavorite)
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
 app.get('/table', showData);
 app.get('*', (request, response) => {
   response.status(500).send('Paw-don us, something un-fur-tunate seems to have occured.')
 })
+app.post('/rollcat', rollCat);
 // ---------------------------------------FUNCTIONS---------------------------------------------
 
 function renderHomePage(request, response){
@@ -73,13 +74,18 @@ function collectResults(request, response){
     .query(comicParams)
     .then(results => {
       let comicArray = results.body.data.results;
-      // console.log('the comic array', comicArray[0].thumbnail);
-      let finalComicArray = comicArray.map(comic => {
-        return new Comic(comic); //not sure about this, in book app its book.volumeInfo
-      });
+      if (comicArray && comicArray.length) {
+        //if there is stuff in the search
+        let finalComicArray = comicArray.map(comic => {
+          return new Comic(comic);
+        })
+        // console.log('this is the final comic array:', finalComicArray);
+        response.render('pages/results.ejs', {searchResults: finalComicArray})
+      } else {
+        //if empty
+        response.render('pages/notfound.ejs')
+      }
 
-      // console.log('this is the final comic array:', finalComicArray);
-      response.render('pages/results.ejs', {searchResults: finalComicArray})
     }).catch((error) => {
       console.log('ERROR', error);
       response.status(500).send('sorry the results are broken')
@@ -129,16 +135,14 @@ function addComicToFavorites(request, response){
 
   superagent.get(url)
     .then(results => {
-
+      console.log(results.body);
       let randomCat = results.body[0].url;
-
+  
       let sql = 'INSERT INTO comics (title, comic_url, description, cat_url) VALUES ($1, $2, $3, $4);';
       let safeValues = [title, image_url, description, randomCat];
 
       client.query(sql, safeValues)
     })
-
-
 }
 
 
@@ -197,6 +201,24 @@ function showData(request, response){
     }).catch(err => console.log(err));
 }
 
+function rollCat(request, response){
+  let url = 'https://api.thecatapi.com/v1/images/search';
+
+  let {id} = request.body;
+  superagent.get(url)
+    .then(results => {
+      let getCat = results.body[0].url;
+
+      // let sql = 'UPDATE * comics (cat_url) VALUES ($1);';
+      let sql = 'UPDATE comics SET cat_url=$1 WHERE id=$2;';
+      let safeValues = [getCat, id];
+
+      client.query(sql, safeValues)
+      response.status(200).redirect('/favorites')
+    })
+    .catch(error => console.log(error))
+}
+
 
 // ---------------------------------------CONSTRUCTOR FUNCTION---------------------------------------------
 
@@ -205,6 +227,7 @@ function Comic(obj){
   this.description = obj.description ? obj.description : 'no description available';
   this.comic_url = obj.thumbnail.path ? `${obj.thumbnail.path}.${obj.thumbnail.extension}` : 'no image available'
 }
+
 
 // console.log('the comic array', comicArray[0].thumbnail);
 
