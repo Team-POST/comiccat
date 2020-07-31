@@ -42,7 +42,6 @@ app.put('/edit/:id', updateComic); // /edit/:id : Make Changes to Selected Comic
 app.delete('/delete/:id', deleteOneFavorite);
 app.get('/about', renderAboutPage);
 app.get('/error', renderErrorPage);
-app.get('/table', showData);
 app.get('*', (request, response) => {
   response.status(500).send('Paw-don us, something un-fur-tunate seems to have occured.')
 })
@@ -197,14 +196,6 @@ function renderErrorPage(request, response){
 }
 
 
-function showData(request, response){
-  let sql = 'SELECT * FROM comics;';
-  client.query(sql)
-    .then(resultsFromPostgres => {
-      let comics = resultsFromPostgres.rows;
-      response.send(comics);
-    }).catch(err => console.log(err));
-}
 
 function rollCat(request, response){
   let url = 'https://api.thecatapi.com/v1/images/search';
