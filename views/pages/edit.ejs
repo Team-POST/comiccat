@@ -19,8 +19,12 @@
                 <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="20" cols="35" placeholder="Write your notes here"><%= incomingComic.notes %></textarea>
                 <p>
                     <label>Read Status</label>
-                    <select id="progress" name="progress" value="<%= incomingComic.progress%> ">
-                        <option hidden disabled selected value>Select an Option</option> <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank to know this  -->
+                    <select id="progress" name="progress" value="<%= incomingComic.progress %> ">
+                        <% if (incomingComic.progress) { %>
+                            <option selected value="<%= incomingComic.progress %>" > <%= incomingComic.progress %> </option>
+                        <% } else { %>
+                            <option hidden disabled selected value>Select an Option</option> <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank to know this  -->
+                        <% } %>
                         <option value="Want to Read">Want to Read</option>
                         <option value="Am Reading">Am Reading</option>
                         <option value="Have Read">Have Read</option>
