@@ -9,7 +9,7 @@
 <main>
 <% allTheFavorites.forEach(fav => {  %>
 <section class = "fav-page">
-    <div class="fav-main">
+    <article class="fav-main">
         <div class="fav-image">
             <img src="<%= fav.comic_url %>">
         </div>
@@ -28,7 +28,7 @@
                 <button class="deleteButton" type="submit">Delete</button>
             </form>
         </div>
-    </div>
+    </article>
     <div class="fav-cat">
         <img src="<%= fav.cat_url %>">
         <form action="/rollcat/" method="POST">
