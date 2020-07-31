@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../layout/head.ejs') %>
+    <title>Favorites Page</title>
+</head>
+<body>
+<%- include('../layout/header.ejs') %>
+<main>
+<% allTheFavorites.forEach(fav => {  %>
+<section class = "fav-page">
+    <article class="fav-main">
+        <div class="fav-image">
+            <img src="<%= fav.comic_url %>">
+        </div>
+        <div class="fav-text">
+            <p class="fav-title"><%= fav.title %></p>
+            <p class="fav-description"><%= fav.description %></p>
+            <p class="fav-notes"><%= fav.notes %></p>
+            <p class="read-progress"><%= fav.progress %></p>
+            <p class="fav-count">This comic has been favorited <%= fav.favorite_count %> times</p>
+        </div>
+        <div class="fav-actions">
+            <form action="/edit/<%= fav.id %>" method="get">
+                <button class="editButton" type="submit">Edit</button>
+            </form>
+            <form action="/delete/<%=fav.id%>?_method=DELETE" method="post">
+                <button class="deleteButton" type="submit">Delete</button>
+            </form>
+        </div>
+    </article>
+    <div class="fav-cat">
+        <img src="<%= fav.cat_url %>">
+        <form action="/rollcat/" method="POST">
+            <input type="hidden" name="id" value="<%=fav.id%>">
+            <button type="submit">Roll for Cat!</button>
+        </form>
+    </div>
+
+</section>
+<% }) %>   
+</main> 
+</body>
+</html>

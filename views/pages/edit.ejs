@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../layout/head.ejs') %>
+    <title>Edit Your ComicCat</title>
+</head>
+<body>
+    <%- include('../layout/header.ejs') %>
+    <section id="editSection">
+        <img id="title" src="<%= incomingComic.comic_url%>" alt="<%= incomingComic.comic_url%>">
+        <form id="editbox" action="/edit/<%= incomingComic.id %>?_method=PUT" method="post"> 
+            <fieldset>
+                <label for="description">Description</label>
+
+                <textarea id="description" name="description" value="<%= incomingComic.description %>" rows="15" cols="30"><%= incomingComic.description %></textarea>
+
+                <label for="notes">Notes</label>
+
+                <textarea id="notes" name="notes" value="<%= incomingComic.notes %>" rows="10" cols="35" placeholder="Write your notes here"><%= incomingComic.notes %></textarea>
+                <p>
+                    <label>Read Status</label>
+                    <select id="progress" name="progress" value="<%= incomingComic.progress%> ">
+                        <option hidden disabled selected value>Select an Option</option> <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank to know this  -->
+                        <option value="Want to Read">Want to Read</option>
+                        <option value="Am Reading">Am Reading</option>
+                        <option value="Have Read">Have Read</option>
+                    </select>
+                </p>
+            </fieldset>
+            <button type="submit">Update</button>
+        </form>
+    </section>
+</body>
+</html>

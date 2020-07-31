@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../layout/head.ejs') %>
+  <title>Comic Cat</title>
+</head>
+<body>
+  <%- include('../layout/header.ejs') %>
+  <div id="titleBlock">
+    <h1>Comic Cat</h1>
+  </div>
+  <section id="intro">
+    <p>Welcome to the Comic Cat App!  Here you can search through the Marvel Comics database, save your favorites (or potential future favorites) and enjoy the company of cozy cat companion along with each of your saved comics.</p>
+  </section>
+  <main id="searchMain">
+    <h4>Find a Comic</h4>
+    <form action="/results" method="post">
+      <input id="textBox" type="text" name="search" placeholder="Enter a Title" required>
+      <fieldset>
+      <button type="submit">Search the Marvel API</button>
+    </form>
+  </main>
+</body>
+</html>

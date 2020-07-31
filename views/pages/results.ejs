@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../layout/head.ejs') %>
+  <title>Results Page</title>
+</head>
+<body>
+  <%- include('../layout/header.ejs') %>
+  <main>
+    <section class="results-page">
+      <% searchResults.forEach( comic => { %>
+        <div class="comic-container">
+          <img class="comic-image" src="<%= comic.comic_url %>"/>
+          <h2 class="comic-title"><%= comic.title %></h2>
+          <p class="comic-description"><%= comic.description %></p>
+        
+          <form action="/addcomic" method="POST">
+            <input type="hidden" name="title" value="<%= comic.title %>" />
+            <input type="hidden" name="description" value="<%= comic.description %>" />
+            <input type="hidden" name="image_url" value="<%= comic.comic_url %>" />
+
+          <button
+          id="<%=comic.title%>"
+          class="favorites-button"type="submit">Add to favorites</button>
+          </form>
+      </div>
+      <% }) %>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
